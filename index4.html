@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="matrix-code section1">
+        <h1>Section 1 - Java QuickSort Code</h1>
+        <pre>
+            <code>
+                import java.util.Scanner;
+
+                /**
+                 * QuickSort
+                 */
+                public class QuickSort {
+
+                    static int partition(String arr[], int left, int right) {
+                        int pivot = right;
+                        int i = -1;
+                        int j = 0;
+                        String temp;
+                        while (j < pivot) {
+                            if (arr[j].compareTo(arr[pivot]) <= 0) {
+                                i++;
+                                if (i != j) {
+                                    temp = arr[i];
+                                    arr[i] = arr[j];
+                                    arr[j] = temp;
+                                }
+                            }
+                            j++;
+                        }
+                        i++;
+                        temp = arr[i];
+                        arr[i] = arr[pivot];
+                        arr[pivot] = temp;
+                        return i;
+                    }
+
+                    static String[] quickSort(String arr[], int left, int right) {
+                        try {
+                            if (left < right) {
+                                int pivotIndex = partition(arr, left, right);
+                                quickSort(arr, left, pivotIndex - 1); // Sorting the left
+                                quickSort(arr, pivotIndex + 1, right); // Sorting the right
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+
+                        return arr;
+                    }
+
+                    public static void main(String[] args) {
+
+                        Scanner sc = new Scanner(System.in);
+                        System.out.print("Enter the length of the array:");
+                        int length = sc.nextInt();
+
+                        String arr[] = new String[length];
+                        // Entering the values
+
+                        System.out.println("Start entering the values of the array...");
+                        for (int i = 0; i < length; i++) {
+                            arr[i] = sc.nextLine();
+                        }
+
+                        arr = quickSort(arr, 0, length - 1);
+
+                        // Printing the array..
+                        System.out.println("The array after sorting is...");
+
+                        for (int i = 0; i < length; i++) {
+                            System.out.print(arr[i] + " ");
+                        }
+                    }
+                }
+            </code>
+        </pre>
+    </div>
+
+    <div class="matrix-code section2">
+        <h1>Section 2 - Java Double Linked List Code</h1>
+        <pre>
+            <code>
+                import java.util.Scanner;
+
+                class Node {
+                    int data;
+                    Node left;
+                    Node right;
+
+                    public Node(int data) {
+                        this.data = data;
+                        this.left = null;
+                        this.right = null;
+                    }
+                }
+
+                class LList {
+                    // ... (your code)
+
+                }
+
+                /**
+                 * DoubleLL
+                 */
+                public class DoubleLL {
+                    public static void main(String[] args) {
+                        Scanner sc = new Scanner(System.in);
+                        Node head = null;
+                        LList list = new LList();
+                        int choice;
+
+                        System.out.print("Enter the length of the linked list:");
+                        int length = sc.nextInt();
+
+                        // Entering the elements
+
+                        for (int i = 0; i < length; i++) {
+                            System.out.print("Enter the data of node " + (i + 1) + " :");
+                            int data = sc.nextInt();
+                            head = list.createNode(head, data);
+                        }
+
+                        do {
+                            System.out.print("Enter your choice. \n1.Insertion\n2.Traversal\n3.Deletion\n4.Exit\n");
+                            choice = sc.nextInt();
+
+                            if (choice == 1) {
+                                System.out.print("Enter the data of the node:");
+                                int data = sc.nextInt();
+
+                                head = list.createNode(head, data);
+                                System.out.println("The list after inserting the node at the back is...");
+                                head = list.traverseNode(head);
+                            } else if (choice == 2) {
+                                System.out.println("The linked list is..");
+                                head = list.traverseNode(head);
+                            } else if (choice == 3) {
+                                System.out.println("The list after deleting a node is..");
+                                head = list.deleteNodeAtFront(head);
+                                head = list.traverseNode(head);
+                            }
+                        } while (choice != 4);
+                    }
+                }
+            </code>
+        </pre>
+    </div>
+</body>
+
+</html>
+
