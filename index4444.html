@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="matrix-code section1">
+        <h1>Section 1 - Java QuickSort Code</h1>
+        <pre>
+            <code>
+                // Inheritanc // import java.util.Scanner;
+class Employee{
+    String name;
+    int age;
+    int phoneno;
+    String address;
+    double salary;
+    void printditails()
+    {
+        System.out.println("NAME : "+name);
+        System.out.println("AGE : "+age);
+        System.out.println("PHONENO : "+phoneno);
+        System.out.println("ADDRES : "+address);
+       
+    }
+    void printsalary(){
+        System.out.println("SALARY : "+salary);
+    }
+}
+class Officer extends Employee{
+    String specialization;
+    void printspecialization(){
+        System.out.println("SPECIALIZATION : "+specialization);
+    }
+}
+class Manager extends Employee
+{
+    String department;
+    void printdepartment()
+    {
+        System.out.println("DEPARTMENT : "+department);
+    }
+}
+public class Inheritance
+{
+    public static void main(String [] args)
+    {
+        Officer x = new Officer();
+        x.name="ganesh";
+        x.age=23;
+        x.phoneno=23567;
+        x.address="ganeshbhavan";
+        x.salary=17000;
+        x.specialization="data is analysis and exploration";
+        System.out.println("DETAILS OF OFFICER");
+        x.printditails();
+        x.printsalary();
+        x.printspecialization();
+        Manager y=new Manager();
+        y.name="sudheer";
+        y.age=24;
+        y.phoneno=27383;
+        y.address="sudheerbhavan";
+        y.salary=17000;
+        y.department="HR";
+        System.out.println("DETAILS OF MANAGER");
+        y.printditails();
+        y.printsalary();
+        y.printdepartment();
+    }
+}
+            </code>
+        </pre>
+    </div>
+
+    <div class="matrix-code section2">
+        <h1>Section 2 - Java Double Linked List Code</h1>
+        <pre>
+            <code>
+                // LinearwithBinarySearch //
+
+#include<stdio.h>
+#include<stdbool.h>
+void linearsearch(int size,int arr[],int key)
+{
+    printf("elements in the array: ");
+    for(int i=0; j<+(size-1);j++)
+    {
+        printf("%d\t",arr[j]);
+    }
+    printf("\n");
+    printf("enter the key : ");
+    scanf("%d",&key);
+    for(int i=0;i<=(size - 1);i++)
+    {
+        if(arr[i]==key)
+        {
+            printf("element is found at the index:%d\n",i);
+        }
+        else if(i<=(size - 1))
+        {
+            i=i++;
+        }
+        else{
+            printf("elemet is not found in the array");
+        }
+    }
+printf("end of linear search");
+printf("\n");
+printf("\n");
+}
+void binarysearch(int high,int low,int arr[],int mid,int key,int size)
+{
+    for(int i=0; i<=(size-1);i++)
+    {
+        for(int j=i+1;i<=(size-1);j++)
+        {
+            if(arr[i]> arr[j]){
+                int temp = arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+            }
+
+        }
+    }
+    printf("sorted array : ");
+    for(int j=0;j<=(size - 1);j++)
+    {
+        printf("%d\t",arr[i]);
+    }
+    printf("\n");
+    printf("enter the key:");
+    scanf("%d",&key);
+    for(int i=0; i<=(size-1);i++){
+        if(arr[i]==key)
+        {
+            printf("element is found at the index: %d\n")
+        }
+        else if(i<=(size - 1)){
+            i=i++;
+        }else{
+            printf("element is not found in array");
+        }
+    }
+    printf("end of Binary search");
+    printf("\n");
+}
+int main()
+{
+    int size,key,choice;
+    printf("enter the size:");
+    scanf("%d",&size);
+    int arr[size];
+    printf("enter the element:");
+    for(int i=0;i<=(size-1);i++)
+    {
+        scanf("%d",&arr[i]);
+    }
+    printf("\n");
+    int low=arr[0],high=arr[size-1],mid=(hight+low)/2;
+    do{
+        printf("1.linear\n 2.binary");
+        printf("enter the choice:");
+        scanf("%d",&choice);
+        switch(choice){
+            case 1: linearsearch(size,arr,key);
+            break;
+            case 2: binarysearch(high,low,arr,mid,key,size);
+            break;
+            default : printf("wrong choice : ");
+        }
+    }while(1);
+}
+            </code>
+        </pre>
+    </div>
+      <button onclick="redirectToNextPage()">Next Page</button>
+
+    <script>
+        function redirectToNextPage() {
+            // Redirect to index44.html
+            window.location.href = 'index44444.html';
+        }
+    </script>
+</body>
+
+</html>
