@@ -1,0 +1,135 @@
+
+
+#include <stdlib.h>
+#include <stdbool.h>
+
+#ifndef __QUEUE__	
+	
+	#define __QUEUE__
+	
+	typedef struct QUEUE_NODE{
+	
+		void *data;
+		struct QUEUE_NODE *link;
+		
+	}QUEUE_NODE;
+	
+	typedef struct QUEUE_HEAD{
+		
+		int count;
+		QUEUE_NODE *front;
+		QUEUE_NODE *rear;
+		
+	}QUEUE_HEAD;
+	
+	QUEUE_HEAD* create_queue(){
+		
+		QUEUE_HEAD *new_queue = (QUEUE_HEAD*) malloc(sizeof(QUEUE_HEAD));
+		if(new_queue == NULL) return NULL;
+		
+		new_queue->count = 0;
+		new_queue->front = NULL;
+		new_queue->rear = NULL;
+		
+		return new_queue;
+		
+	}
+	
+	void* enqueue(QUEUE_HEAD *queue_header, void *data){
+		
+		QUEUE_NODE *new_node = (QUEUE_NODE*) malloc(sizeof(QUEUE_NODE));
+		if(new_node == NULL) return NULL;
+		
+		new_node->data = data;
+		new_node->link = NULL;
+		
+		if(queue_header->count == 0)
+			queue_header->front = new_node;
+		else
+			queue_header->rear->link = new_node;
+			
+		(queue_header->count)++;
+		queue_header->rear = new_node;
+		
+		return (void*)100;
+		
+	}
+	
+	void* dequeue(QUEUE_HEAD *queue_header){
+	
+		QUEUE_NODE *front_node;
+		
+		if(queue_header->count == 0)
+			return NULL;
+			
+		front_node = queue_header->front;
+		void *data = front_node->data;
+		
+		if(queue_header->count == 1)
+			queue_header->rear = queue_header->front = NULL;
+		else
+			queue_header->front = front_node->link;
+		
+		(queue_header->count)--;
+		
+		free(front_node);
+		
+		return data;
+		
+	}
+	
+	void* queue_front(QUEUE_HEAD *queue_header){
+			
+		if(queue_header->count == 0)
+			return NULL;
+		else 
+			return queue_header->front->data;
+		
+	}
+	
+	void* queue_rear(QUEUE_HEAD *queue_header){
+			
+		if(queue_header->count == 0)
+			return NULL;
+		else 
+			return queue_header->rear->data;
+		
+	}
+	
+	
+	bool queue_empty(QUEUE_HEAD *queue_header){
+	
+		if(queue_header->count == 0)
+			return true;
+		else
+			return false;
+		
+	}
+	
+	
+	int queue_count(QUEUE_HEAD *queue_header){
+	
+		return queue_header->count;	
+		
+	}
+	
+	void delete_queue(QUEUE_HEAD **queue_header){
+	
+		QUEUE_NODE *next_node = (*queue_header)->front;
+		QUEUE_NODE *waste_node;
+		
+		while(next_node != NULL){
+		
+			waste_node = next_node;
+			next_node = next_node->link;
+			
+			free(waste_node);
+			
+		}
+		
+		free(*queue_header);
+		*queue_header = NULL;
+		
+	}
+	
+#endif

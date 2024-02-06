@@ -1,0 +1,298 @@
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "queue.h"
+
+typedef struct{
+	
+	struct vertex *first_vertex;
+	struct vertex *last_vertex;
+	int vertices;
+	
+}GRAPH_HEAD;
+
+typedef struct vertex{
+	
+	struct vertex *next_vertex;
+	int data;
+	struct arc *next_arc;
+	bool visited;
+	
+}VERTEX;
+
+typedef struct arc{
+
+	struct vertex *dest;
+	struct arc *next_arc;
+	
+}ARC;
+
+GRAPH_HEAD* create_graph(){
+
+	GRAPH_HEAD *new = (GRAPH_HEAD*)malloc(sizeof(GRAPH_HEAD));
+	if(new == NULL){
+	
+		printf("Failed to allocate memory!\n");
+		exit(EXIT_FAILURE);
+		
+	}
+	
+	new->first_vertex = NULL;
+	new->last_vertex = NULL;
+	new->vertices = 0;
+	return new;
+	
+}
+
+VERTEX* create_vertex(int data){
+
+	VERTEX *new = (VERTEX*) malloc(sizeof(VERTEX));
+	if(new == NULL){
+	
+		printf("Failed to allocate memory!\n");
+		exit(EXIT_FAILURE);
+		
+	}
+	
+	new->data = data;
+	new->next_vertex = NULL;
+	new->next_arc = NULL;
+	new->visited = false;
+	
+	return new;
+	
+}
+
+ARC* create_arc(VERTEX* dest){
+
+	ARC *new = (ARC*)malloc(sizeof(ARC));
+	if(new == NULL){
+	
+		printf("Failed to allocate memory!\n");
+		exit(EXIT_FAILURE);
+		
+	}
+	
+	new->dest = dest;
+	new->next_arc = NULL;
+	
+	return new;
+	
+}
+
+void insert_vertex(GRAPH_HEAD *graph){
+	
+	VERTEX *vt;
+	int n_vertex, data;
+	
+	printf("Enter how many vertices : ");
+	scanf("%d", &n_vertex);
+	
+	graph->vertices = n_vertex;
+	
+	printf("\nEnter first vertex.\n");
+	for(int i = 0; i < n_vertex; i++){
+	
+		printf("Enter vertex %d : ", (i+1));
+		scanf("%d", &data);
+	
+		if(graph->first_vertex == NULL){
+		
+			graph->first_vertex = create_vertex(data);
+			graph->last_vertex = graph->first_vertex;
+		}else{
+		
+			vt = graph->first_vertex;
+			while(vt->next_vertex != NULL)
+				vt = vt->next_vertex;
+				
+			vt->next_vertex = create_vertex(data);
+			graph->last_vertex = vt->next_vertex;
+			
+		}
+		
+	}
+	
+}
+
+VERTEX* peek_vertices(GRAPH_HEAD *graph, int data){
+
+	VERTEX *vt = graph->first_vertex;
+	
+	while(vt != NULL){
+	
+		if(vt->data == data)
+			return vt;
+		
+		vt = vt->next_vertex;
+		
+	}
+	
+	return NULL;
+	
+}
+
+
+void insert_arc(GRAPH_HEAD *graph){
+	
+	VERTEX *vt = graph->first_vertex;
+	VERTEX *temp, *new;
+	ARC *rc;
+	
+	int n_arc, data;
+	
+	for(int i = 0; i < graph->vertices; i++){
+	
+		printf("Enter how many outdegree arc's for vertex %d : ", (vt->data));
+		scanf("%d", &n_arc);
+		
+		printf("Vertex %d outdegree arc's.\n", (vt->data));
+		for(int j = 0; j < n_arc; j++){
+		
+			printf("Enter outdegree arc %d : ", (j + 1));
+			scanf("%d", &data);
+			
+			if(vt->next_arc == NULL){
+				
+				temp = peek_vertices(graph, data);
+				
+				if(temp == NULL){
+					
+					new = create_vertex(data);
+					rc = create_arc(new);
+					vt->next_arc = rc;
+					
+					graph->last_vertex->next_vertex = new;
+					graph->last_vertex = new;
+					
+				}else{
+				
+					rc = create_arc(temp);
+					vt->next_arc = rc;
+					
+				}
+				
+			}else{
+				
+				rc = vt->next_arc;
+				
+				while(rc->next_arc != NULL)
+					rc = rc->next_arc;
+					
+				temp = peek_vertices(graph, data);
+				
+				if(temp == NULL){
+					
+					new = create_vertex(data);
+					rc->next_arc = create_arc(new);
+					
+					graph->last_vertex->next_vertex = new;
+					graph->last_vertex = new;
+					
+				}else{
+				
+					rc->next_arc = create_arc(temp);
+					
+				}
+				
+			}
+			
+		}
+		
+		vt = vt->next_vertex;
+		putchar('\n');
+	}
+	
+}
+
+
+void print_graph(GRAPH_HEAD *graph){
+
+	VERTEX *vt = graph->first_vertex;
+	ARC *rc;
+	
+	for(int i = 0; i < graph->vertices; i++){
+		
+		rc = vt->next_arc;
+		
+		printf("Vertex : %d\tEdges : ", vt->data);
+		
+		while(rc != NULL){
+		
+			printf("%d ", rc->dest->data);
+			rc = rc->next_arc;
+			
+		}
+		
+		vt = vt->next_vertex;
+		putchar('\n');
+		
+	}
+		
+}
+
+void breadth_first_traverse(GRAPH_HEAD *graph){
+	
+	QUEUE_HEAD *queue = create_queue();
+	VERTEX *vt = graph->first_vertex;
+	VERTEX *ptr;
+	ARC *rc;
+	
+	while(vt != NULL){
+	
+		enqueue(queue, vt);
+		
+		while(!queue_empty(queue)){
+		
+			ptr = (VERTEX*) dequeue(queue);
+			
+			if(ptr->visited == false){
+			
+				printf("%d ", ptr->data);
+				ptr->visited = true;
+				
+				rc = ptr->next_arc;
+				
+				while(rc != NULL){
+				
+					if(rc->dest->visited == false)
+						enqueue(queue, rc->dest);
+						
+					rc = rc->next_arc;
+						
+				}
+				
+			}
+			
+		}
+		
+		vt = vt->next_vertex;
+	
+	}
+		
+}
+
+int main(){
+	
+	GRAPH_HEAD *graph = create_graph();
+	
+	insert_vertex(graph);
+	putchar('\n');
+	insert_arc(graph);
+	
+	putchar('\n');
+	printf("==================================================\n");
+	print_graph(graph);
+	printf("\n==================================================\n");
+	putchar('\n');
+	
+	printf("Breadth First Traversal.\n");
+	breadth_first_traverse(graph);
+	putchar('\n');
+	
+	return 0;
+	
+}
+

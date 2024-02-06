@@ -1,0 +1,45 @@
+
+//Implementation of Insertion sort algorithm.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(){
+	
+	int *arr, size;
+	int i, j, temp;
+	
+	printf("INSERTION SORT\n");
+	
+	printf("Enter how many elements to sort : ");
+	scanf("%d", &size);
+	
+	arr = (int*)calloc(size, sizeof(int));
+	
+	printf("Enter the elements : \n");
+	for(i = 0; i < size; i++)
+		scanf("%d", &arr[i]);
+	
+	clock_t start = clock();
+	for(i = 1; i < size; i++){
+		
+		temp = arr[i];
+		
+		for(j = i - 1; ( j >= 0 && temp < arr[j] ); j--)
+			arr[j + 1] = arr[j];
+			
+		arr[j+1] = temp;
+		
+	}
+	clock_t end = clock();
+	
+	printf("Sorted array : \n");
+	for(i = 0; i < size; i++)
+		printf("%d ", arr[i]);
+
+	printf("\nTime taken : %lf seconds\n", (double)(end - start)/CLOCKS_PER_SEC);
+
+	return 0;
+	
+}

@@ -1,0 +1,124 @@
+
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+#ifndef __STACK__
+
+	#define __STACK__
+
+	typedef struct STACK_NODE{
+
+		struct STACK_NODE *link;
+		void *data;
+	
+	}STACK_NODE;
+
+
+	typedef struct{
+
+		struct STACK_NODE *top;
+		int count;
+	
+	}STACK_HEAD;
+
+
+	STACK_HEAD* create_stack(){
+		
+		STACK_HEAD *new_head = (STACK_HEAD*) malloc(sizeof(STACK_HEAD));
+		
+		new_head->top = NULL;
+		new_head->count = 0;
+		
+		return new_head;
+		
+	}
+
+
+	void push(STACK_HEAD *head, void *data){
+
+		STACK_NODE *new_node = (STACK_NODE*) malloc(sizeof(STACK_NODE));
+		if(new_node == NULL){
+	
+			printf("Stack Overflow!\n");
+			exit(EXIT_FAILURE);
+		
+		}
+	
+		new_node->link = head->top;
+		new_node->data = data;
+	
+		head->top = new_node;
+		head->count++;
+	
+	}
+	
+	
+	void* pop(STACK_HEAD *head){
+
+		void* data;
+		STACK_NODE *waste_node = head->top;
+	
+		if(waste_node == NULL){
+	
+			return NULL;
+		
+		}
+	
+		head->top = waste_node->link;
+		head->count--;
+	
+		data = waste_node->data;
+	
+		free(waste_node);
+	
+		return data;
+	
+	}
+
+
+	void* stack_top(STACK_HEAD *head){
+
+		if(head->top == NULL){
+	
+			return NULL;
+		
+		}
+
+		return head->top->data;
+	
+	}
+
+
+	int stack_count(STACK_HEAD *head){
+
+		return head->count;
+	
+	}
+	
+	bool is_stack_empty(STACK_HEAD *head){
+	
+		return (head->top == NULL)? true : false;
+		
+	}
+	
+	void delete_stack(STACK_HEAD **head){
+	
+		STACK_NODE *next_node = (*head)->top;
+		STACK_NODE *waste_node;
+		
+		while(next_node != NULL){
+		
+			waste_node = next_node;
+			next_node = next_node->link;
+			
+			free(waste_node);
+			
+		}
+		
+		free(*head);
+		*head = NULL;
+		
+	}
+
+#endif

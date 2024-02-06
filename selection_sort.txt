@@ -1,0 +1,49 @@
+
+//Implementation of selection sort algorithm.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(){
+	
+	int *arr, size;
+	int i, j, loc, temp;
+	
+	
+	printf("SELECTION SORT\n");
+	
+	printf("Enter how many elements to sort : ");
+	scanf("%d", &size);
+	
+	arr = (int*)calloc(size, sizeof(int));
+	
+	printf("Enter the elements : \n");
+	for(i = 0; i < size; i++)
+		scanf("%d", &arr[i]);
+	
+	clock_t start = clock();
+	for(i = 0; i < size; i++){
+		
+		loc = i;
+		
+		for(j = i + 1; j < size; j++)
+			if(arr[loc] > arr[j])
+				loc = j;
+		
+		temp = arr[loc];
+		arr[loc] = arr[i];
+		arr[i] = temp;
+		
+	}
+	clock_t end = clock();
+	
+	printf("Sorted array : \n");
+	for(i = 0; i < size; i++)
+		printf("%d ", arr[i]);
+
+	printf("\nTime taken : %lf seconds\n", (double)(end - start)/CLOCKS_PER_SEC);
+
+	return 0;
+	
+}

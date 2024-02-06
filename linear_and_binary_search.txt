@@ -1,0 +1,197 @@
+
+/*
+
+	Implementation of search algorithms
+	linear search and binary search.
+
+*/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define CLS_SCREEN system("clear")
+#define CLS_INPUT_BUFF while(getchar() != '\n')
+
+bool linear_search(int array[], int size, int key);
+bool binary_search(int array[], int size, int key);
+void bubble_sort(int array[], int size);
+void show_array(int array[], int nElements);
+
+int main(){
+	
+	int *array, key;
+	int nElements, choice;
+	int flag;
+	char runAgain;
+	
+	do{
+		CLS_SCREEN;
+		
+		while(true){
+		
+			printf("\nEnter how many elements : ");
+			scanf("%d", &nElements);
+		
+			if(nElements <= 0)
+				printf("Number of elements cannot be zero or less than zero!\n");
+			else 
+				break;
+	
+		}
+	
+		array = (int*) calloc(nElements, sizeof(int));
+		if(array == NULL){
+	
+			printf("Failed to allocate memory!\n");
+			exit(EXIT_FAILURE);
+		
+		}
+	
+		printf("Enter the elements : ");
+			for(int i = 0; i < nElements; i++)
+			scanf("%d", &array[i]);
+	
+		printf("Enter a key to search : ");
+		scanf("%d", &key);
+	
+		printf("\nEnter 1 for linear search.\n");
+		printf("Enter 2 for binary search.\n");
+		printf("Enter an option : ");
+		scanf("%d", &choice);
+	
+		switch(choice){
+		
+			case 1: 
+				show_array(array, nElements);
+				
+				flag = linear_search(array, nElements, key);
+				if(flag == false)  
+					printf("Key ' %d ' not found in Array!\n :(\n", key);
+					 
+				break;
+				  
+			case 2:	
+				bubble_sort(array, nElements);
+				printf("\nSorted Array : \n");
+				show_array(array, nElements);
+					
+				flag = binary_search(array, nElements, key);
+				if(flag == false)
+					printf("Key ' %d ' not found in Array! :(\n", key);
+		
+				break;
+		
+			default : printf("Enter a valid option! :(\n");
+		
+		}
+	
+		free(array);
+	
+		CLS_INPUT_BUFF;
+		printf("\nDo you want to continue (y/n) : ");
+		scanf("%c", &runAgain);
+	
+	}while(runAgain == 'y' || runAgain == 'Y');
+	
+	CLS_SCREEN;
+	
+}
+
+void show_array(int array[], int nElements){
+
+	printf("=================================\n");
+	printf("Array\n");
+	for(int i = 0; i < nElements; i++)
+		printf("Array[%d] = %d \n", i, array[i]);
+	printf("=================================\n");
+	putchar('\n');
+	
+}
+
+bool linear_search(int array[], int size, int key){
+	
+	bool hasKey = false;
+	for(int i = 0; i < size; i++)
+		if(key == array[i]){
+		
+			hasKey = true;
+			printf("Key ' %d ' found in Array, Location = %d\n", key, i);
+			
+		}
+		
+	return (hasKey == false) ? false : true;
+	
+}
+
+void bubble_sort(int array[], int size){
+	
+	int i, j, temp;
+	
+	for(i = 1; i < size; i++){
+	
+		for(j = 0; j < (size-i); j++){
+		
+			if(array[j] > array[j+1]){
+				
+				temp = array[j];
+				array[j] = array[j+1];
+				array[j+1] = temp;
+					
+			}	
+			
+		}
+		
+	}
+	
+}
+
+bool binary_search(int array[], int nElements, int key){
+
+	bool hasKey = false;
+	int low = 0, high = (nElements-1), mid;
+	int temp;
+	
+	while(low <= high){
+	
+		mid = (low + high) / 2;
+		
+		if(key == array[mid]){
+			
+			hasKey = true;
+			printf("Key ' %d ' found in Array, Location = %d\n", key, mid);
+			
+			temp = mid - 1;
+			while(temp >= 0 && array[temp] == key){
+				
+				printf("Key ' %d ' found in Array, Location = %d\n", key, temp);
+				temp--;
+				
+			}
+			
+			temp = mid + 1;
+			while(temp < nElements && array[temp] == key){
+				
+				printf("Key ' %d ' found in Array, Location = %d\n", key, temp);
+				temp++;
+				
+			}
+			
+			break;
+			
+		}else if(key < array[mid]){
+			
+			high = mid - 1;
+		
+		}else{
+			
+			low = low + 1;
+		
+		}	
+		
+	}
+	
+	return (hasKey == false) ? false : true;
+	
+}
