@@ -10,22 +10,19 @@
       background-color: #0a0a0a;
       color: #00ff00;
       overflow: hidden;
-    }
-
-    .maintenance-container {
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      text-align: center;
       position: relative;
     }
 
     .maintenance-text {
       font-size: 30px;
       color: #00ff00;
-      position: relative;
       z-index: 1;
+      text-align: center;
+      animation: blink 1s infinite;
     }
 
     .matrix-container {
@@ -59,10 +56,6 @@
       z-index: 1;
     }
 
-    .blink {
-      animation: blink 1s infinite;
-    }
-
     @keyframes blink {
       0%, 100% {
         opacity: 1;
@@ -90,17 +83,14 @@
     </div>
   </div>
 
-  <div class="maintenance-container">
-    <div class="maintenance-text blink">Under Maintenance</div>
-    <p class="maintenance-text">We are upgrading to provide a more futuristic experience.</p>
-    <p class="maintenance-text">Thank you for your patience. Explore the future with us!</p>
-    <img class="futuristic-image" src="your-futuristic-image.jpg" alt="Futuristic Estate Image">
-  </div>
+  <div class="maintenance-text">Under Maintenance</div>
+
+  <img class="futuristic-image" src="your-futuristic-image.jpg" alt="Futuristic Estate Image">
 
   <script>
     setTimeout(() => {
       window.location.href = 'index4.html';
-    }, 14000); // Redirect after 5 seconds (adjust as needed)
+    }, 5000); // Redirect after 5 seconds (adjust as needed)
   </script>
 
 </body>
