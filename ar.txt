@@ -1,0 +1,39 @@
+import java.util.Scanner;
+ class Area{
+    void t1(int a, int b){
+        float area=(b*a)/2;
+        System.out.println("Area of triangle is:"+area);
+    }
+    void t1(double p,double r){
+        double area=p*r*r;
+        System.out.println("Area if circle is:"+area);
+    }
+    void t1(float c,float d){
+        float area=c*d;
+        System.out.println("Area of rectangle is:"+area);
+    }
+}
+
+public class overloading {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the base and height of triangle:");
+        int a=sc.nextInt();
+        int b=sc.nextInt();
+        Area x=new Area();
+        x.t1(a,b);
+        System.out.println("Enter the length and breadth of rectangle:");
+        float c=sc.nextInt();
+        float d=sc.nextInt();
+        Area x1=new Area();
+        x1.t1(c,d);
+        System.out.println("Enter the radius of the circle:");
+        double p=3.14;
+        double s=sc.nextDouble();
+        Area x2=new Area();
+        x2.t1(p,s);
+
+
+    }
+
+    }
