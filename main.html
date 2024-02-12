@@ -39,6 +39,16 @@
       text-align: center;
     }
 
+    .futuristic-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 600px;
+      z-index: 1;
+    }
+
     .maintenance-container {
       z-index: 1;
       text-align: center;
@@ -48,16 +58,6 @@
       font-size: 30px;
       color: #00ff00;
       animation: blink 1s infinite;
-    }
-
-    .futuristic-image {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%;
-      max-width: 600px;
-      z-index: 1;
     }
 
     @keyframes blink {
@@ -87,11 +87,11 @@
     </div>
   </div>
 
+  <img class="futuristic-image" src="your-futuristic-image.jpg" alt="Futuristic Estate Image">
+
   <div class="maintenance-container">
     <div class="maintenance-text blink">Under Maintenance</div>
   </div>
-
-  <img class="futuristic-image" src="your-futuristic-image.jpg" alt="Futuristic Estate Image">
 
   <script>
     setTimeout(() => {
