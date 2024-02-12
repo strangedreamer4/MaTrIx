@@ -60,20 +60,27 @@
       width: 80%;
       max-width: 600px;
     }
+
+    .blink {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
 
   <div class="matrix-container">
     <div class="matrix-text">
-      <!-- Add your futuristic estate details here -->
-      Future Estate
-      <br>
-      Luxurious Living
-      <br>
-      Smart Homes
-      <br>
-      Advanced Technology
+      <!-- Updated matrix text -->
+      No system is secure towards the future. Who am I?
     </div>
   </div>
 
@@ -90,7 +97,7 @@
   <script>
     setTimeout(() => {
       window.location.href = 'index4.html';
-    }, 5000); // Redirect after 5 seconds (adjust as needed)
+    }, 12000); // Redirect after 5 seconds (adjust as needed)
   </script>
 
 </body>
