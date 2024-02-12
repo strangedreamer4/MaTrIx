@@ -1,0 +1,37 @@
+
+abstract class Shape{
+  abstract void showShape();
+}
+
+class Rectangle extends Shape{
+    void showShape(){
+        System.out.println("Rectangle has 4 sides.");
+    }
+}
+
+class Triangle extends Shape{
+    void showShape(){
+        System.out.println("Triangle has 3 sides.");
+    }
+}
+
+class Hexagon extends Shape{
+    void showShape(){
+        System.out.println("Hexagon has 6 sides.");
+    }
+}
+/**
+ * Polymorphism
+ */
+public class Polymorphism {
+  public static void main(String[] args) {
+    Rectangle a = new Rectangle();
+    Triangle b = new Triangle();
+    Hexagon c = new Hexagon();
+
+    a.showShape();
+    b.showShape();
+    c.showShape();
+  }
+    
+}

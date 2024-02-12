@@ -1,0 +1,34 @@
+import java.util.Scanner;
+public class Second {
+    public static void main(String[] args) {
+          Scanner sc = new Scanner(System.in);
+          int[] array = new int[10];
+int limit, temp;
+
+System.out.print("Enter the limit : ");
+limit = sc.nextInt();
+
+System.out.print("Enter the numbers : ");
+for(int k = 0; k < limit; k++){
+        
+        array[k] = sc.nextInt();
+        
+        }
+        
+for(int i = 0; i < limit; i++){
+       for(int j = i+1; j < limit; j++){
+        
+         if(array[i] > array[j]){
+           
+           temp = array[i];
+           array[i] = array[j];
+           array[j] = temp;
+           
+           }
+          }
+         }
+       
+
+        System.out.println("Second smallest number : " +array[1]);
+    }
+}
