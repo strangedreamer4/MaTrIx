@@ -6,8 +6,8 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Courier New', monospace;
-      background-color: #001800;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0a0a0a;
       color: #00ff00;
       overflow: hidden;
     }
@@ -21,7 +21,7 @@
     }
 
     .maintenance-text {
-      font-size: 24px;
+      font-size: 30px;
       color: #00ff00;
     }
 
@@ -45,11 +45,20 @@
     }
 
     .matrix-text {
-      font-size: 16px;
+      font-size: 20px;
       line-height: 1.5;
       white-space: nowrap;
       position: absolute;
       animation: matrix 10s linear infinite;
+    }
+
+    .futuristic-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 600px;
     }
   </style>
 </head>
@@ -57,31 +66,31 @@
 
   <div class="matrix-container">
     <div class="matrix-text">
-      <!-- Add your cool movies here -->
-      The Matrix
+      <!-- Add your futuristic estate details here -->
+      Future Estate
       <br>
-      Inception
+      Luxurious Living
       <br>
-      Blade Runner
+      Smart Homes
       <br>
-      The Dark Knight
-      <br>
-      Interstellar
+      Advanced Technology
     </div>
   </div>
 
   <div class="maintenance-container">
     <div>
-      <h1 class="maintenance-text blink">Maintenance Break</h1>
-      <p class="maintenance-text">We are currently performing maintenance on our website.</p>
-      <p class="maintenance-text">Please check back later. Thank you for your patience.</p>
+      <h1 class="maintenance-text blink">Under Maintenance</h1>
+      <p class="maintenance-text">We are upgrading to provide a more futuristic experience.</p>
+      <p class="maintenance-text">Thank you for your patience. Explore the future with us!</p>
     </div>
   </div>
+
+  <img class="futuristic-image" src="your-futuristic-image.jpg" alt="Futuristic Estate Image">
 
   <script>
     setTimeout(() => {
       window.location.href = 'index4.html';
-    }, 12000); // Redirect after 5 seconds (adjust as needed)
+    }, 5000); // Redirect after 5 seconds (adjust as needed)
   </script>
 
 </body>
